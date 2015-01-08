@@ -70,15 +70,18 @@ public String pigLatinWord(String sWord)
 public String pigLatinLine(String sWord) {
 	int previousWord = 0;
 	String translatedString = "";
+	String endingChar = ",";
 	for (int i = 0; i < sWord.length(); i ++) {
+		if (sWord.substring(i, i + 1).equals(",") || sWord.substring(i, i + 1).equals(".") ) {
+			endingChar = sWord.substring(i, i + 1);
+		}
 		if (sWord.substring(i, i + 1).equals(" ") || sWord.substring(i, i + 1).equals(",") || sWord.substring(i, i + 1).equals(".")) {
 			translatedString = translatedString + " " + pigLatinWord(sWord.substring(previousWord, i));
 			previousWord = i + 1;
 		}
-
 	}
 	if (translatedString.equals("")) {return "LINE_ERROR";}
-	return translatedString;
+	return translatedString + endingChar;
 }
 //Another function that uses pigLatinWord for each word.
   static public void main(String[] passedArgs) {
